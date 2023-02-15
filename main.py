@@ -1,4 +1,7 @@
 import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+
 import keyboard as keyboard
 
 # create an instance of cv2.VideoCapture() to capture video from the default camera (notebook camera)
@@ -17,7 +20,7 @@ while counter != 4:
     ret, frame = cap.read()
 
     # resize the frame (if desired)
-    frame = cv2.resize(frame, (240, 240))
+    frame = cv2.resize(frame, (250, 250   ))
 
     # display the frame in a window
     cv2.imshow("test", frame)
@@ -33,6 +36,22 @@ while counter != 4:
     elif key == ord('q'):
         break
 
+
+image1 = plt.imread("image0.jpg")
+image2 = plt.imread("image1.jpg")
+image3 = plt.imread("image2.jpg")
+image4 = plt.imread("image3.jpg")
+
+# Concatenate the four images horizontally and vertically
+top_row = np.concatenate((image1, image2), axis=1)
+bottom_row = np.concatenate((image3, image4), axis=1)
+concatenated_image = np.concatenate((top_row, bottom_row), axis=0)
+
+# Display the concatenated image with imshow
+plt.imshow(concatenated_image)
+
+# Show the plot
+plt.show()
 # release the camera and close the window
 cap.release()
 cv2.destroyAllWindows()

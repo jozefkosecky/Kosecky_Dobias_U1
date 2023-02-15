@@ -1,4 +1,5 @@
 import cv2
+import keyboard as keyboard
 
 # create an instance of cv2.VideoCapture() to capture video from the default camera (notebook camera)
 cap = cv2.VideoCapture(0)
@@ -9,7 +10,9 @@ cap.set(cv2.CAP_PROP_EXPOSURE, 0.1)
 # cap.set(cv2.CAP_PROP_CONVERT_RGB, 0.1)
 cap.set(cv2.CAP_PROP_AUTO_WB, 1)
 
-while True:
+counter = 0
+
+while counter != 4:
     # capture a frame from the camera
     ret, frame = cap.read()
 
@@ -21,7 +24,13 @@ while True:
 
     key = cv2.waitKey(1)
 
-    if key == ord('q'):
+    if key == ord(' '):
+        filename = "image{}.jpg".format(counter)
+        cv2.imwrite(filename, frame)
+        counter += 1
+        print("Saved image to {}".format(filename))
+
+    elif key == ord('q'):
         break
 
 # release the camera and close the window

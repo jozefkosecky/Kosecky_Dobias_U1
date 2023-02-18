@@ -42,13 +42,20 @@ image2 = plt.imread("image1.jpg")
 image3 = plt.imread("image2.jpg")
 image4 = plt.imread("image3.jpg")
 
+
+# Create the sharpening kernel
+kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]])
+
+# Apply the sharpening kernel to the image using filter2D
+sharpened_image1 = cv2.filter2D(image1, -1, kernel)
+
 rotated_image2 = cv2.rotate(image2, cv2.ROTATE_90_CLOCKWISE)
 
 red_image3 = image3.copy()
-red_image3[:, :, 1:] = 0
+red_image3[10:100, 10:100, 1:] = 0
 
 # Concatenate the four images horizontally and vertically
-top_row = np.concatenate((image1, rotated_image2), axis=1)
+top_row = np.concatenate((sharpened_image1, rotated_image2), axis=1)
 bottom_row = np.concatenate((red_image3, image4), axis=1)
 concatenated_image = np.concatenate((top_row, bottom_row), axis=0)
 

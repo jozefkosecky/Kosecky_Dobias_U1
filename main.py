@@ -44,13 +44,21 @@ image4 = plt.imread("image3.jpg")
 
 dimensions = image1.shape
 
-rotated_image2 = cv2.rotate(image2, cv2.ROTATE_90_CLOCKWISE)
+# rotated_image2 = cv2.rotate(image2, cv2.ROTATE_90_CLOCKWISE)
+
+height, width, num_channels = image2.shape
+
+rot_image = image2.copy()
+for row in range(height):
+         for col in range(width):
+             rot_image[row][col], rot_image[col][row] = image2[col][row], image2[row][col]
 
 red_image3 = image3.copy()
 red_image3[:, :, 1:] = 0
 
+
 # Concatenate the four images horizontally and vertically
-top_row = np.concatenate((image1, rotated_image2), axis=1)
+top_row = np.concatenate((image1, rot_image), axis=1)
 bottom_row = np.concatenate((red_image3, image4), axis=1)
 concatenated_image = np.concatenate((top_row, bottom_row), axis=0)
 
@@ -62,6 +70,12 @@ concatenated_image[0:dimensions[0], 0:dimensions[1]] = cv2.filter2D(concatenated
 
 # Display the concatenated image with imshow
 plt.imshow(concatenated_image)
+
+# Print to terminal
+h, w, n = concatenated_image.shape
+print("datovy typ: " + str(concatenated_image.dtype))
+print("rozmer: " + str(h) + str(w))
+print("velkost obrazku: " + str(concatenated_image.size))
 
 # Show the plot
 plt.show()

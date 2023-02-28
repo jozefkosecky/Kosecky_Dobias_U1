@@ -68,6 +68,9 @@ concatenated_image[0:dimensions[0], 0:dimensions[1]] = cv2.filter2D(concatenated
 # Display the concatenated image with imshow
 plt.imshow(concatenated_image)
 
+# Save the concatenated image
+cv2.imwrite("obrazok_final.jpg", concatenated_image)
+
 # Print to terminal
 h, w, n = concatenated_image.shape
 print("datovy typ: " + str(concatenated_image.dtype))

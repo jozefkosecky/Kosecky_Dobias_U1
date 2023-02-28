@@ -44,8 +44,6 @@ image4 = plt.imread("image3.jpg")
 
 dimensions = image1.shape
 
-# rotated_image2 = cv2.rotate(image2, cv2.ROTATE_90_CLOCKWISE)
-
 height, width, num_channels = image2.shape
 
 rot_image = image2.copy()
@@ -55,7 +53,6 @@ for row in range(height):
 
 red_image3 = image3.copy()
 red_image3[:, :, 1:] = 0
-
 
 # Concatenate the four images horizontally and vertically
 top_row = np.concatenate((image1, rot_image), axis=1)
